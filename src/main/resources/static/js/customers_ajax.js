@@ -23,15 +23,18 @@ $(document).ready(function () {
     var name = $("#name").val();
     var email = $("#email").val();
     var address = $("#address").val();
-    var customer = {name: name, email: email, address: address};
 
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
       url: "http://localhost:8080/customers_ajax/save",
-      data: JSON.stringify(customer),
-
+      data: JSON.stringify({
+        name: name,
+        email: email,
+        address: address,
+      }),
       cache: false,
+
       success: function (result) {
         $("#msg").html(
           "<span style='color: green'>Customer added succesfuly.</span>"
@@ -41,7 +44,9 @@ $(document).ready(function () {
         }, 1000);
       },
       error: function (err) {
-        $("#msg").html("<span style='color: red'>Name is required</span>");
+        $("#msg").html(
+          "<span style='color: red'>Name is required</span>"
+        );
       },
     });
   });
@@ -83,12 +88,16 @@ $(document).ready(function () {
     var address = parent.children("td:nth-child(4)");
     var buttons = parent.children("td:nth-child(5)");
 
-    name.html("<input type='text' id='txtName' value='" + name.html() + "'/>");
+    name.html(
+      "<input type='text' id='txtName' value='" + name.html() + "'/>"
+    );
     email.html(
       "<input type='text' id='txtEmail' value='" + email.html() + "'/>"
     );
     address.html(
-      "<input type='text' id='txtAddress' value='" + address.html() + "'/>"
+      "<input type='text' id='txtAddress' value='" +
+        address.html() +
+        "'/>"
     );
     buttons.html(
       "<button id='save'>Save</button>&nbsp;&nbsp;<button class='delete' id='" +
@@ -109,10 +118,12 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "http://localhost:8080/company/save",
+      url: "http://localhost:8080/customers_ajax/save",
       data: JSON.stringify({
         id: id.html(),
         name: name.children("input[type=text]").val(),
+        email: email.children("input[type=text]").val(),
+        address: address.children("input[type=text]").val(),
       }),
       cache: false,
       success: function () {

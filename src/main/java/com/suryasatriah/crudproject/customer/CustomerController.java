@@ -19,6 +19,11 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @RequestMapping("/")
+    public String home() {
+        return "index";
+    }
+
     @GetMapping("/customers")
     public String getCustomers(Model model) {
         List<Customer> listCustomer = customerService.listCustomers();
