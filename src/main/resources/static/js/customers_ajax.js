@@ -8,7 +8,7 @@ $(document).ready(function () {
       tr.push("<td>" + json[i].email + "</td>");
       tr.push("<td>" + json[i].address + "</td>");
       tr.push(
-        "<td><button class='edit'>Edit</button>&nbsp;&nbsp;<button class='delete' id=" +
+        "<td><button class='btn btn-warning edit'>Edit</button>&nbsp;&nbsp;<button class='btn btn-warning delete' id=" +
           json[i].id +
           ">Delete</button></td>"
       );
@@ -61,7 +61,7 @@ $(document).ready(function () {
         cache: false,
         success: function () {
           parent.fadeOut("slow", function () {
-            $(this).remove();
+            $(this).reve();
           });
           location.reload(true);
         },
@@ -81,7 +81,6 @@ $(document).ready(function () {
 
   $(document).delegate(".edit", "click", function () {
     var parent = $(this).parent().parent();
-
     var id = parent.children("td:nth-child(1)");
     var name = parent.children("td:nth-child(2)");
     var email = parent.children("td:nth-child(3)");
